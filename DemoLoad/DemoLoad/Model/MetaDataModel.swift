@@ -53,12 +53,12 @@ extension DataModel: MetaDataParsingProtocol {
                 //*****Every time it gives follwoing error****//
                 //*** The data couldn’t be read because it isn’t in the correct format.****//
                 //****Fails at following JSONSerialization function and go to catch block****//
-                let resultDict: Any = try JSONSerialization.jsonObject(with: responseData, options: [])
-                guard let dict: [String : Any] = resultDict as? [String : Any] else{
-                    return  (title: nil, list: nil)
-                }
-                
-                print("\(dict)")
+//                let resultDict: Any = try JSONSerialization.jsonObject(with: responseData, options: .mutableLeaves)
+//                guard let dict: [String : Any] = resultDict as? [String : Any] else{
+//                    return  (title: nil, list: nil)
+//                }
+//                
+//                print("\(dict)")
                 
                 let jsonDecoder = JSONDecoder()
                 jsonDecoder.keyDecodingStrategy = .useDefaultKeys

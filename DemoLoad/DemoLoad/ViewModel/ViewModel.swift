@@ -42,13 +42,21 @@ class ViewModel {
                 let jsonFile: String = fileURL.lastPathComponent()
                 let storePath: String = CommomUtility().writeJSONWith(fileName: jsonFile)
                
-                DispatchQueue.global(qos: .background).async {
+                if FileManager.default.fileExists(atPath: storePath){
                     do{
-                        try responseData.write(to: URL(fileURLWithPath: storePath))
-                        weakSelf.readJSONFileWith(path: storePath, closure: completionHandler)
+                        try FileManager.default.removeItem(at: URL(fileURLWithPath: storePath))
+                       
                     }catch{
-                        
+                        print("Fails to remove")
                     }
+                    
+                }
+                
+                do{
+                    try responseData.write(to: URL(fileURLWithPath: storePath))
+                    weakSelf.readJSONFileWith(path: storePath, closure: completionHandler)
+                }catch{
+                    
                 }
 
             }
@@ -59,7 +67,7 @@ class ViewModel {
     //MARK:--------Read JSON file------------//
     private func readJSONFileWith(path: String, closure: @escaping (_ status: Bool) -> Void){
         do{
-            let jsonData: Data = try Data(contentsOf: URL(fileURLWithPath: path)) //Didn't get proper data
+            let jsonData: Data = try Data(contentsOf: URL(fileURLWithPath: path) , options: .alwaysMapped) //Didn't get proper data
             let parseInfo = self.dataModel?.parsedMetaDataWith(data: jsonData)
             
             if let _title = parseInfo?.title{

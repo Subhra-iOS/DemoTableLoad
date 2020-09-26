@@ -31,7 +31,11 @@ final class FileDownloader{
                 if let imageData: Data = data{
                     DispatchQueue.global(qos: .background).async {
                         do{
-                            try imageData.write(to: URL(fileURLWithPath: self._url ?? ""), options: [])
+                            if FileManager.default.fileExists(atPath: self.storePath ?? ""){
+                                try FileManager.default.removeItem(at: URL(fileURLWithPath: self.storePath ?? ""))
+                            }
+                            try imageData.write(to: URL(fileURLWithPath: self.storePath ?? ""), options: [])
+                            
                             self.operationStateHandler?(true, self.storePath, self.identifier)
                         }catch{
                             self.operationStateHandler?(false, self.storePath, self.identifier)

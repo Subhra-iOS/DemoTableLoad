@@ -32,11 +32,12 @@ extension UIImageView{
         
         let fileName: String = imageUrl.lastPathComponent()
         let storePath = self.fetchItemsImagePath(fileName: fileName)
-        let fileDownloader: FileDownloader = FileDownloader(url: imageUrl, filePath: storePath, taskIdentifier: identifier)
         
         if CommomUtility().isFileExistAt(storePath){
             completion(true, storePath, identifier)
         }else{
+            let fileDownloader: FileDownloader = FileDownloader(url: imageUrl, filePath: storePath, taskIdentifier: identifier)
+            fileDownloader.downloadFile()
             fileDownloader.operationStateHandler = { ( status,  fileStorePath,  _identifier) in
                 completion(status, fileStorePath, _identifier)
             }

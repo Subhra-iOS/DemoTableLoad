@@ -10,6 +10,9 @@ import  UIKit
 
 class  TableViewCell: UITableViewCell{
     
+    var imageUrl: String?
+    var taskId: String = ""
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.contentView.addSubview(containerView)
@@ -40,7 +43,7 @@ class  TableViewCell: UITableViewCell{
         label.font = UIFont.boldSystemFont(ofSize: 15)
         label.textColor =  UIColor.gray
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = UIColor.yellow
+      //  label.backgroundColor = UIColor.yellow
         return label
     }()
     
@@ -51,13 +54,13 @@ class  TableViewCell: UITableViewCell{
         label.numberOfLines = 0
         label.minimumScaleFactor = 0.5
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = UIColor.systemBlue
+      //  label.backgroundColor = UIColor.systemBlue
         return label
     }()
     
     let containerView:UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.green
+       // view.backgroundColor = UIColor.green
         view.translatesAutoresizingMaskIntoConstraints = false
         view.clipsToBounds = true // this will make sure its children do not go out of the boundary
         return view

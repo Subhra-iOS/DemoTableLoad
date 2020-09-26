@@ -11,12 +11,13 @@ let cellIdentifier = "cellIdentifier"
 
 class ViewController: UIViewController {
 
-    private var lazyTable: UITableView!
+    public private(set) var lazyTable: UITableView!
+    var viewModel: ViewModel!
     
     override func loadView() {
         print("Load View")
         let view: UIView = UIView(frame: .zero)
-        view.backgroundColor = UIColor.lightText
+        view.backgroundColor = UIColor.clear
         self.view = view
     }
     
@@ -25,6 +26,7 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
         self.title = "Country"
         self.creatListView()
+        self.initiateViewModel()
     }
 
     private func creatListView(){

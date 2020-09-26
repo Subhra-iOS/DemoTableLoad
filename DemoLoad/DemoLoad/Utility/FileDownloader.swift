@@ -23,7 +23,7 @@ final class FileDownloader{
         self.storePath = filePath
         self.identifier = taskIdentifier
     }
-    
+    //MARK:-------Download file --------------//
     func downloadFile(){
     
             let task = downloadSession.dataTask(with: URL(string: self._url ?? "")!) { (data, _, error) in

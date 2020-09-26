@@ -10,7 +10,7 @@ import Foundation
 protocol MetaDataParsingProtocol {
     func parsedMetaDataWith(data: Data?) -> (title: String?, list: [ItemModel]?)
 }
-
+//MARK:----------JSON codable structure for parsing---------//
 struct MetaDataModel: Codable {
      var title: String?
      var rows: [ItemModel]?
@@ -36,12 +36,13 @@ struct ItemModel: Codable {
     }
     
 }
-
+//MARK:-----------Data Model to retain Data in memory--------//
 struct DataModel {
     var title: String?
     var list: [ItemModel]?
 }
 
+//MARK:------------Data Parsing Protocol----------//
 extension DataModel: MetaDataParsingProtocol {
     
     func parsedMetaDataWith(data: Data?) -> (title: String?, list: [ItemModel]?) {

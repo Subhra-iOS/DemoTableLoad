@@ -16,7 +16,7 @@ class ViewModel {
     init(_dataModel: DataModel) {
         self.dataModel = _dataModel
     }
-    
+    //MARK:--------------Fetch data from server-----------//
     func fetchMetaDataFromServerWith(_ completionHandler: @escaping (_ status: Bool) -> Void){
         let fileURL : String = "https://dl.dropboxusercontent.com/s/2iodh4vg0eortkl/facts.json"
         let session = URLSession(configuration: .default)
@@ -27,9 +27,7 @@ class ViewModel {
                 completionHandler(false)
                 return
             }
-            
-            print("\(String(describing: String(data: data!, encoding: .utf8)))")
-            
+                    
             if let _ = error {
                 completionHandler(false)
             }else{
@@ -38,6 +36,8 @@ class ViewModel {
                     completionHandler(false)
                     return
                 }
+                
+                print("\(String(describing: String(data: responseData, encoding: .utf8)))") // It gets nil for normal conversion, need to write facts.json
                 
                 let jsonFile: String = fileURL.lastPathComponent()
                 let storePath: String = CommomUtility().writeJSONWith(fileName: jsonFile)
@@ -56,10 +56,10 @@ class ViewModel {
         task.resume()
             
     }
-    
+    //MARK:--------Read JSON file------------//
     private func readJSONFileWith(path: String, closure: @escaping (_ status: Bool) -> Void){
         do{
-            let jsonData: Data = try Data(contentsOf: URL(fileURLWithPath: path))
+            let jsonData: Data = try Data(contentsOf: URL(fileURLWithPath: path)) //Didn't get proper data
             let parseInfo = self.dataModel?.parsedMetaDataWith(data: jsonData)
             
             if let _title = parseInfo?.title{

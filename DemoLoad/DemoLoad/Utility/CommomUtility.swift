@@ -8,6 +8,7 @@
 import Foundation
 
 struct CommomUtility {
+    //MARK:----------Unique task id----------//
     func uniqueTaskIdentifier() -> String {
         
         let timeIntervalToday: TimeInterval = Date().timeIntervalSince1970
@@ -17,7 +18,7 @@ struct CommomUtility {
         return  taskIdentitfierInString
         
     }
-    
+    //MARK:------Check file existance------------//
     func isFileExistAt(_ path : String) -> Bool {
         
         if FileManager.default.fileExists(atPath: path) {
@@ -30,7 +31,7 @@ struct CommomUtility {
         }
         
     }
-    
+    //MARK:-------Delete corrupted data----------//
     func deleteFileFromDocumentDirectory(destinationStorePath : String) ->Void{
         
         do{
@@ -63,7 +64,7 @@ struct CommomUtility {
         }
         
     }
-    
+    //MARK:-------Creat file path to write JSON file----------//
     func writeJSONWith(fileName: String) -> String{
         
         let paths: String = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]

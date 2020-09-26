@@ -10,7 +10,7 @@ import UIKit
 
 extension UIImageView{
     
-
+//MARK:---------create image file path--------------//
     private func fetchItemsImagePath(fileName:String?) -> String{
         
         let paths: String = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
@@ -27,7 +27,7 @@ extension UIImageView{
         
         return  path
     }
-    
+    //MARK:-------download image over network----------//
     func downloadImageWith(imageUrl: String, identifier: String, completion: @escaping (_ status: Bool, _ filePath: String?, _ taskIdentifier: String?) -> Void) -> Void{
         
         let fileName: String = imageUrl.lastPathComponent()

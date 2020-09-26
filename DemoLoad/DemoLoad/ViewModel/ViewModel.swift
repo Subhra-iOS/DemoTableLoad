@@ -54,6 +54,7 @@ class ViewModel {
                 
                 do{
                     try responseData.write(to: URL(fileURLWithPath: storePath))
+                    print("json file path: \(storePath)")
                     weakSelf.readJSONFileWith(path: storePath, closure: completionHandler)
                 }catch{
                     
@@ -67,7 +68,7 @@ class ViewModel {
     //MARK:--------Read JSON file------------//
     private func readJSONFileWith(path: String, closure: @escaping (_ status: Bool) -> Void){
         do{
-            let jsonData: Data = try Data(contentsOf: URL(fileURLWithPath: path) , options: .alwaysMapped) //Didn't get proper data
+            let jsonData: Data = try Data(contentsOf: URL(fileURLWithPath: path)) //Didn't get proper data
             let parseInfo = self.dataModel?.parsedMetaDataWith(data: jsonData)
             
             if let _title = parseInfo?.title{

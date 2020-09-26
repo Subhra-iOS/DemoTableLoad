@@ -18,6 +18,7 @@ extension TableViewCell{
     }
     
     func reloadImages(){
+        self.activityLoader.startAnimating()
         self.iconImageView.downloadImageWith(imageUrl: self.imageUrl ?? "", identifier: self.taskId) { [weak self] (state, fileStorePath, taskIdentifier) in
             
             guard  let weakSelf = self, let currentID: String = taskIdentifier,  weakSelf.taskId.isEqual(currentID) else {
@@ -25,6 +26,7 @@ extension TableViewCell{
             }
             
             DispatchQueue.main.async{
+                weakSelf.activityLoader.stopAnimating()
                 if  let image: UIImage = UIImage(contentsOfFile: fileStorePath ?? ""){
                     weakSelf.iconImageView.image = image
                     weakSelf.iconImageView.backgroundColor = UIColor.clear

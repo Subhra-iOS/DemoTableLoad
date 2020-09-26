@@ -17,8 +17,12 @@ class  TableViewCell: UITableViewCell{
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.contentView.addSubview(containerView)
         self.setContainerViewContraint()
-        containerView.addSubview(iconImageView)
+        containerView.addSubview(imageHolderView)
+        self.setImageHolderContarint()
+        imageHolderView.addSubview(iconImageView)
         self.setImageIconContarint()
+        imageHolderView.addSubview(activityLoader)
+        self.setActivityLoaderConstraint()
         containerView.addSubview(nameLabel)
         containerView.addSubview(detailedLabel)
         self.setNameLabelConstraint()
@@ -29,13 +33,29 @@ class  TableViewCell: UITableViewCell{
         super.init(coder: aDecoder)
     }
     
+    let imageHolderView: UIView = {
+        let view = UIView(frame: .zero)
+        view.backgroundColor = UIColor.clear
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.clipsToBounds = true
+        return view
+    }()
+    
     let iconImageView:UIImageView = {
         let img = UIImageView()
         img.contentMode = .scaleAspectFill // image will never be strecthed vertially or horizontally
         img.translatesAutoresizingMaskIntoConstraints = false // enable autolayout
-        img.backgroundColor = UIColor.gray
+        img.backgroundColor = UIColor(red: (224.0/255.0), green: (224.0/255.0), blue: (224.0/255.0), alpha: 1.0)
         img.clipsToBounds = true
+        img.layer.cornerRadius = 5
         return img
+    }()
+    
+    let  activityLoader: UIActivityIndicatorView = {
+        let loader = UIActivityIndicatorView(style: .gray)
+        loader.hidesWhenStopped = true
+        loader.translatesAutoresizingMaskIntoConstraints = false
+        return loader
     }()
     
     let nameLabel:UILabel = {

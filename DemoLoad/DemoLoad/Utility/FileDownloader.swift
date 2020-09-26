@@ -11,7 +11,7 @@ typealias FileDownloaderHandler = (_ status : Bool, _ fileStorePath : String?, _
 
 final class FileDownloader{
     
-    private var downloadQueue: DispatchQueue = DispatchQueue(label: "com.download.Queue", attributes: .concurrent)
+   // private var downloadQueue: DispatchQueue = DispatchQueue(label: "com.download.Queue", attributes: .concurrent)
     private var _url: String?
     private var storePath: String?
     public   var operationStateHandler : FileDownloaderHandler?
@@ -26,7 +26,6 @@ final class FileDownloader{
     
     func downloadFile(){
     
-        downloadQueue.async { [unowned self] in
             let task = downloadSession.dataTask(with: URL(string: self._url ?? "")!) { (data, _, error) in
                 
                 if let imageData: Data = data{
@@ -45,8 +44,6 @@ final class FileDownloader{
             }
             
             task.resume()
-        }
-        
     }
     
 }

@@ -16,6 +16,7 @@
 		2A60F7B0251F7B0500AC2B1D /* FileDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A60F7AF251F7B0500AC2B1D /* FileDownloader.swift */; };
 		2A60F7B3251F866700AC2B1D /* String+Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A60F7B2251F866700AC2B1D /* String+Utility.swift */; };
 		2A60F7B6251F89E100AC2B1D /* CommomUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A60F7B5251F89E100AC2B1D /* CommomUtility.swift */; };
+		2AB395432520A37800E595A0 /* ViewController+PullToRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB395422520A37800E595A0 /* ViewController+PullToRefresh.swift */; };
 		2AC4BA1E251F46BE0053F030 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC4BA1D251F46BE0053F030 /* AppDelegate.swift */; };
 		2AC4BA20251F46BE0053F030 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC4BA1F251F46BE0053F030 /* SceneDelegate.swift */; };
 		2AC4BA22251F46BE0053F030 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC4BA21251F46BE0053F030 /* ViewController.swift */; };
@@ -35,6 +36,7 @@
 		2A60F7AF251F7B0500AC2B1D /* FileDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDownloader.swift; sourceTree = "<group>"; };
 		2A60F7B2251F866700AC2B1D /* String+Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Utility.swift"; sourceTree = "<group>"; };
 		2A60F7B5251F89E100AC2B1D /* CommomUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommomUtility.swift; sourceTree = "<group>"; };
+		2AB395422520A37800E595A0 /* ViewController+PullToRefresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+PullToRefresh.swift"; sourceTree = "<group>"; };
 		2AC4BA1A251F46BE0053F030 /* DemoLoad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoLoad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AC4BA1D251F46BE0053F030 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2AC4BA1F251F46BE0053F030 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 				2AC4BA21251F46BE0053F030 /* ViewController.swift */,
 				2AC4BA38251F50730053F030 /* ViewController+TableViewDelegate.swift */,
 				2A60F7A7251F750800AC2B1D /* ViewController+UpdateUI.swift */,
+				2AB395422520A37800E595A0 /* ViewController+PullToRefresh.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -216,6 +219,7 @@
 			files = (
 				2A60F7B6251F89E100AC2B1D /* CommomUtility.swift in Sources */,
 				2A60F7AC251F78D900AC2B1D /* UIImageView+Utility.swift in Sources */,
+				2AB395432520A37800E595A0 /* ViewController+PullToRefresh.swift in Sources */,
 				2AC4BA40251F56FA0053F030 /* TableViewCell.swift in Sources */,
 				2A60F793251F692E00AC2B1D /* TableViewCell+MetaData.swift in Sources */,
 				2AC4BA22251F46BE0053F030 /* ViewController.swift in Sources */,

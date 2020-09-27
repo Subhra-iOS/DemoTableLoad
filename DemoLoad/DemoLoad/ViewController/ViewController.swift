@@ -14,6 +14,16 @@ class ViewController: UIViewController {
     public private(set) var lazyTable: UITableView!
     var viewModel: ViewModel!
     
+    //MARK:------Refresh Control--------//
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.addTarget(self, action: #selector(self.handleRefresh(_:)), for: UIControl.Event.valueChanged)
+        refreshControl.tintColor = .gray
+       
+        return refreshControl
+    }()
+    
     override func loadView() {
         print("Load View")
         let view: UIView = UIView(frame: .zero)
@@ -37,6 +47,7 @@ class ViewController: UIViewController {
         self.lazyTable.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         self.addConstraintToTableView()
         self.lazyTable.register(TableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+        self.lazyTable.refreshControl = self.refreshControl
     }
     
     private func addConstraintToTableView(){

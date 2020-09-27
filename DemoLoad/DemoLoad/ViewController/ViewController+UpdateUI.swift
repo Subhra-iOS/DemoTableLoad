@@ -9,16 +9,7 @@ import Foundation
 import  UIKit
 
 extension ViewController{
-    
-     func fetchMetaDataFromServer() {
-        self.viewModel.fetchMetaDataFromServerWith({ (status) in
-            DispatchQueue.main.async { [weak self] in
-                self?.title = self?.viewModel?.title
-                self?.lazyTable.reloadData()
-            }
-        })
-    }
-    
+    //MARK:-------Initiate View model on load---------//
     func initiateViewModel(){
         let dataModel: DataModel = DataModel()
         self.viewModel = ViewModel(_dataModel: dataModel)

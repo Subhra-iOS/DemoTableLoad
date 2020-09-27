@@ -10,15 +10,24 @@ import UIKit
 
 extension ViewController{
     
+    /// Refresh Handler for pull to refresh
+    /// - Parameter refreshControl: UIRefreshControl Object
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
-        self.stopPullToRefresh()
         self.fetchMetaDataFromServer()
     }
     
-    private func stopPullToRefresh(){
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.refreshControl.endRefreshing()
-            self.lazyTable.contentOffset = CGPoint.zero
-        }
+    //MARK:----- Fetch metadata from server--------
+    func fetchMetaDataFromServer() {
+        self.viewModel.fetchMetaDataFromServerWith({ (status) in
+            DispatchQueue.main.async { [weak self] in
+                guard let weakSelf = self else { return }
+                weakSelf.title = self?.viewModel?.title
+                weakSelf.lazyTable.reloadData()
+                if weakSelf.refreshControl.isRefreshing {
+                    self?.refreshControl.endRefreshing()
+                    self?.lazyTable.contentOffset = CGPoint.zero
+                }
+            }
+        })
     }
 }

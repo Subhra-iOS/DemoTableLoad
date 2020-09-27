@@ -39,18 +39,7 @@ class ViewModel {
                 
                 print("\(String(describing: String(data: responseData, encoding: .utf8)))") // It gets nil for normal conversion, need to write facts.json
                 
-                let jsonFile: String = fileURL.lastPathComponent()
-                let storePath: String = CommomUtility().writeJSONWith(fileName: jsonFile)
-               
-                if FileManager.default.fileExists(atPath: storePath){
-                    do{
-                        try FileManager.default.removeItem(at: URL(fileURLWithPath: storePath))
-                       
-                    }catch{
-                        print("Fails to remove")
-                    }
-                    
-                }
+                let storePath: String = weakSelf.removeExistingFileAndReturnNewPathWith(fileUrl: fileURL)
                 
                 do{
                     try responseData.write(to: URL(fileURLWithPath: storePath))
@@ -65,6 +54,24 @@ class ViewModel {
         task.resume()
             
     }
+    
+    private func removeExistingFileAndReturnNewPathWith(fileUrl: String) -> String{
+        
+        let jsonFileName: String = fileUrl.lastPathComponent()
+        let storePath: String = CommomUtility().writeJSONWith(fileName: jsonFileName)
+        
+        if FileManager.default.fileExists(atPath: storePath){
+            do{
+                try FileManager.default.removeItem(at: URL(fileURLWithPath: storePath))
+                
+            }catch{
+                print("Fails to remove")
+            }
+        }
+        
+        return storePath
+    }
+    
     //MARK:--------Read JSON file------------//
     private func readJSONFileWith(path: String, closure: @escaping (_ status: Bool) -> Void){
         do{

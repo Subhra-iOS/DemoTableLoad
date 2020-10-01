@@ -12,6 +12,17 @@ class  TableViewCell: UITableViewCell{
     
     var imageUrl: String?
     var taskId: String = ""
+    //MARK:--------Cell View Model--------
+    var cellViewModel: TableCellViewModel? {
+        
+        didSet{
+            self.nameLabel.text = cellViewModel?.title ?? ""
+            self.detailedLabel.text = cellViewModel?.description ?? ""
+            self.imageUrl = cellViewModel?.imageHref ?? ""
+            self.taskId = cellViewModel?.identifier ?? ""
+        }
+        
+    }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -62,6 +73,7 @@ class  TableViewCell: UITableViewCell{
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 15)
         label.textColor =  UIColor.gray
+        label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
       //  label.backgroundColor = UIColor.yellow
         return label
@@ -70,7 +82,8 @@ class  TableViewCell: UITableViewCell{
     let detailedLabel:UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 13)
-        label.textColor =  UIColor.lightText
+        label.textColor =  UIColor.lightGray
+        label.textAlignment = .left
         label.numberOfLines = 0
         label.minimumScaleFactor = 0.5
         label.translatesAutoresizingMaskIntoConstraints = false

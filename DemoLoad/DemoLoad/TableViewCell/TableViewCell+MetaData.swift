@@ -10,16 +10,15 @@ import  UIKit
 
 extension TableViewCell{
     
-    func loadMetaDataWith(listItem: ItemModel){
-        self.nameLabel.text = listItem.title ?? ""
-        self.detailedLabel.text = listItem.description ?? ""
-        self.imageUrl = listItem.imageHref ?? ""
-        self.taskId = listItem.identifier ?? ""
-    }
-    
     func reloadImages(){
+        
+        self.iconImageView.backgroundColor = UIColor(red: (224.0/255.0), green: (224.0/255.0), blue: (224.0/255.0), alpha: 1.0)
+        guard let url = self.imageUrl else {
+            return
+        }
+        
         self.activityLoader.startAnimating()
-        self.iconImageView.downloadImageWith(imageUrl: self.imageUrl ?? "", identifier: self.taskId) { [weak self] (state, fileStorePath, taskIdentifier) in
+        self.iconImageView.downloadImageWith(imageUrl: url, identifier: self.taskId) { [weak self] (state, fileStorePath, taskIdentifier) in
             
             guard  let weakSelf = self, let currentID: String = taskIdentifier,  weakSelf.taskId.isEqual(currentID) else {
                 return
@@ -28,11 +27,11 @@ extension TableViewCell{
             DispatchQueue.main.async{
                 weakSelf.activityLoader.stopAnimating()
                 if  let image: UIImage = UIImage(contentsOfFile: fileStorePath ?? ""){
+                    weakSelf.iconImageView.image = nil
                     weakSelf.iconImageView.image = image
                     weakSelf.iconImageView.backgroundColor = UIColor.clear
                 }else{
-                    weakSelf.iconImageView.image = nil
-                    CommomUtility().deleteFileFromDocumentDirectory(destinationStorePath: fileStorePath ?? "")
+                    weakSelf.iconImageView.backgroundColor = UIColor(red: (224.0/255.0), green: (224.0/255.0), blue: (224.0/255.0), alpha: 1.0)
                 }
             }
             

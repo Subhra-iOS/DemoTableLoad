@@ -11,6 +11,7 @@ import  UIKit
 extension ViewController{
     //MARK:-------Initiate View model on load---------//
     func initiateViewModel(){
+        self.viewActivityLoader.startAnimating()
         let dataModel: DataModel = DataModel()
         self.viewModel = ViewModel(_dataModel: dataModel)
         self.fetchMetaDataFromServer()

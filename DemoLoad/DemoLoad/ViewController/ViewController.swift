@@ -24,6 +24,13 @@ class ViewController: UIViewController {
         return refreshControl
     }()
     
+    lazy var  viewActivityLoader: UIActivityIndicatorView = {
+        let loader = UIActivityIndicatorView(style: .gray)
+        loader.hidesWhenStopped = true
+        loader.translatesAutoresizingMaskIntoConstraints = false
+        return loader
+    }()
+    
     override func loadView() {
         print("Load View")
         let view: UIView = UIView(frame: .zero)
@@ -48,6 +55,9 @@ class ViewController: UIViewController {
         self.addConstraintToTableView()
         self.lazyTable.register(TableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         self.lazyTable.refreshControl = self.refreshControl
+        self.lazyTable.isHidden = true
+        self.view.addSubview(self.viewActivityLoader)
+        self.setViewActivityLoaderConstraint()
     }
     
     private func addConstraintToTableView(){
@@ -59,6 +69,16 @@ class ViewController: UIViewController {
         NSLayoutConstraint(item: self.lazyTable!, attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self.view, attribute: NSLayoutConstraint.Attribute.top, multiplier: 1, constant: 10).isActive = true
         
         NSLayoutConstraint(item: self.lazyTable! , attribute: NSLayoutConstraint.Attribute.bottom, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self.view, attribute: NSLayoutConstraint.Attribute.bottom, multiplier: 1, constant: -10).isActive = true
+    }
+    
+    private func setViewActivityLoaderConstraint(){
+        NSLayoutConstraint(item: viewActivityLoader, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 35).isActive = true
+        NSLayoutConstraint(item: viewActivityLoader, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 35).isActive = true
+        
+        NSLayoutConstraint(item: viewActivityLoader, attribute: .centerX, relatedBy: .equal, toItem: self.lazyTable!, attribute: .centerX, multiplier: 1.0, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: viewActivityLoader, attribute: .centerY, relatedBy: .equal, toItem: self.lazyTable!, attribute: .centerY, multiplier: 1.0, constant: 0).isActive = true
+        
     }
 
 }

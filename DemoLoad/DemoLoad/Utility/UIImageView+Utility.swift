@@ -16,7 +16,6 @@ extension UIImageView{
         let paths: String = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
         var path: String = paths.appendingFormat("/Downloads/Images/")
         
-        path = path.appendingFormat("Thumbnail/")
         _ =   CommomUtility().createDirectoryIfNecessaryForPath(path: path)
         
         if let _fileName : String = fileName, _fileName.count > 0 {
@@ -30,6 +29,7 @@ extension UIImageView{
     //MARK:-------download image over network----------//
     func downloadImageWith(imageUrl: String, identifier: String, completion: @escaping (_ status: Bool, _ filePath: String?, _ taskIdentifier: String?) -> Void) -> Void{
         
+        self.image = nil
         let fileName: String = imageUrl.lastPathComponent()
         let storePath = self.fetchItemsImagePath(fileName: fileName)
         

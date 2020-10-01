@@ -25,9 +25,6 @@ struct ItemModel: Codable {
     var title: String?
     var description: String?
     var imageHref: String?
-     var identifier: String? {
-        return CommomUtility().uniqueTaskIdentifier()
-    }
     
     private enum CodingKeys: String, CodingKey{
         case title = "title"
@@ -40,6 +37,13 @@ struct ItemModel: Codable {
 struct DataModel {
     var title: String?
     var list: [ItemModel]?
+}
+//MARK:--------Table Cell ViewModel-------//
+struct TableCellViewModel {
+    var title: String?
+    var description: String?
+    var imageHref: String?
+    var identifier: String?
 }
 
 //MARK:------------Data Parsing Protocol----------//

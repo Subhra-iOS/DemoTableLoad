@@ -8,7 +8,7 @@
 import Foundation
 
 class ViewModel {
-    public private(set) var list: [ItemModel]?
+    public private(set) var list: [TableCellViewModel]?
     public private(set) var title: String?
     public private(set) var dataModel: DataModel?
 
@@ -75,7 +75,13 @@ class ViewModel {
     //MARK:--------Read JSON file------------//
     private func readJSONFileWith(path: String, closure: @escaping (_ status: Bool) -> Void){
         do{
-            let jsonData: Data = try Data(contentsOf: URL(fileURLWithPath: path)) //Didn't get proper data
+            let jsonStr = try String(contentsOf: URL(fileURLWithPath: path), encoding: .ascii)
+           // let jsonData: Data = try Data(contentsOf: URL(fileURLWithPath: path)) //Didn't get proper data
+            guard let jsonData: Data = jsonStr.data(using: .utf8) else {
+                self.list = nil
+                closure(false)
+                return
+            }
             let parseInfo = self.dataModel?.parsedMetaDataWith(data: jsonData)
             
             if let _title = parseInfo?.title{
@@ -89,7 +95,9 @@ class ViewModel {
                 closure(false)
                 return
             }
-            self.list = array
+            self.list = array.compactMap({ (model) -> TableCellViewModel in
+                return TableCellViewModel(title: model.title, description: model.description, imageHref: model.imageHref, identifier: CommomUtility().uniqueTaskIdentifier())
+            })
             closure(true)
         }catch{
             self.list = nil

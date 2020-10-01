@@ -38,15 +38,15 @@ class FileDownloader : NSObject{
     
     //MARK:-------Download file --------------//
     func downloadFile(){
-        
-        downloadQueue.async {
-            if let currentSession : URLSession = self.sharedSession , let newUrl: String = self._url{
+        if let currentSession : URLSession = self.sharedSession , let newUrl: String = self._url{
+            downloadQueue.async {
                 let request: URLRequest = URLRequest(url: URL(string: newUrl)!)
-                let downloadTask = currentSession.dataTask(with: request)
-                downloadTask.resume()
+                self.sharedSessionTask = currentSession.dataTask(with: request)
+                self.sharedSessionTask?.resume()
             }
+        }else{
+            
         }
-       
     }
     
     private func finishTask() -> Void{

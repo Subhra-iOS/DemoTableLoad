@@ -75,9 +75,9 @@ class ViewController: UIViewController {
         NSLayoutConstraint(item: viewActivityLoader, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 35).isActive = true
         NSLayoutConstraint(item: viewActivityLoader, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 35).isActive = true
         
-        NSLayoutConstraint(item: viewActivityLoader, attribute: .centerX, relatedBy: .equal, toItem: self.lazyTable!, attribute: .centerX, multiplier: 1.0, constant: 0).isActive = true
+        NSLayoutConstraint(item: viewActivityLoader, attribute: .centerX, relatedBy: .equal, toItem: self.view, attribute: .centerX, multiplier: 1.0, constant: 0).isActive = true
         
-        NSLayoutConstraint(item: viewActivityLoader, attribute: .centerY, relatedBy: .equal, toItem: self.lazyTable!, attribute: .centerY, multiplier: 1.0, constant: 0).isActive = true
+        NSLayoutConstraint(item: viewActivityLoader, attribute: .centerY, relatedBy: .equal, toItem: self.view, attribute: .centerY, multiplier: 1.0, constant: 0).isActive = true
         
     }
 

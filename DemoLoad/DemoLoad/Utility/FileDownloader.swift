@@ -10,8 +10,6 @@ import Foundation
 typealias FileDownloaderHandler = (_ status : Bool, _ fileStorePath : String?, _  identifier: String?) -> Void
 
 class FileDownloader : NSObject{
-    
-    private var downloadQueue: DispatchQueue = DispatchQueue(label: "com.download.Queue", attributes: .concurrent)
     private var sharedSessionTask : URLSessionTask?
     private var _url: String?
     private var storePath: String?
@@ -39,11 +37,9 @@ class FileDownloader : NSObject{
     //MARK:-------Download file --------------//
     func downloadFile(){
         if let currentSession : URLSession = self.sharedSession , let newUrl: String = self._url{
-            downloadQueue.async {
-                let request: URLRequest = URLRequest(url: URL(string: newUrl)!)
-                self.sharedSessionTask = currentSession.dataTask(with: request)
-                self.sharedSessionTask?.resume()
-            }
+            let request: URLRequest = URLRequest(url: URL(string: newUrl)!)
+            self.sharedSessionTask = currentSession.dataTask(with: request)
+            self.sharedSessionTask?.resume()
         }else{
             
         }

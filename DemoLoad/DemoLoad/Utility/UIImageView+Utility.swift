@@ -9,29 +9,13 @@ import Foundation
 import UIKit
 
 extension UIImageView{
-    
-//MARK:---------create image file path--------------//
-    private func fetchItemsImagePath(fileName:String?) -> String{
-        
-        let paths: String = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-        var path: String = paths.appendingFormat("/Downloads/Images/")
-        
-        _ =   CommomUtility().createDirectoryIfNecessaryForPath(path: path)
-        
-        if let _fileName : String = fileName, _fileName.count > 0 {
-            path = path.appendingFormat("%@", _fileName)
-        }else{
-            path = ""
-        }
-        
-        return  path
-    }
+
     //MARK:-------download image over network----------//
     func downloadImageWith(imageUrl: String, identifier: String, completion: @escaping (_ status: Bool, _ filePath: String?, _ taskIdentifier: String?) -> Void) -> Void{
         
         self.image = nil
         let fileName: String = imageUrl.lastPathComponent()
-        let storePath = self.fetchItemsImagePath(fileName: fileName)
+        let storePath = CommomUtility().fetchItemsImagePath(fileName: fileName)
         
         if CommomUtility().isFileExistAt(storePath){
             completion(true, storePath, identifier)

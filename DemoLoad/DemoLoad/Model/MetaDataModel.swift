@@ -38,13 +38,6 @@ struct DataModel {
     var title: String?
     var list: [ItemModel]?
 }
-//MARK:--------Table Cell ViewModel-------//
-struct TableCellViewModel {
-    var title: String?
-    var description: String?
-    var imageHref: String?
-    var identifier: String?
-}
 
 //MARK:------------Data Parsing Protocol----------//
 extension DataModel: MetaDataParsingProtocol {
@@ -78,6 +71,32 @@ extension DataModel: MetaDataParsingProtocol {
         }catch let error{
             print("\(error.localizedDescription)")
             return (title: nil, list: nil)
+        }
+    }
+    
+}
+
+
+//MARK:--------Table Cell ViewModel-------//
+struct TableCellViewModel {
+    var title: String?
+    var description: String?
+    var imageHref: String?
+    var identifier: String?
+    
+    func downloadRemoteFileWith(imageUrl: String, identifier: String, completion: @escaping (_ status: Bool, _ filePath: String?, _ taskIdentifier: String?) -> Void) -> Void{
+        
+        let fileName: String = imageUrl.lastPathComponent()
+        let storePath = CommomUtility().fetchItemsImagePath(fileName: fileName)
+        
+        if CommomUtility().isFileExistAt(storePath){
+            completion(true, storePath, identifier)
+        }else{
+            let fileDownloader: FileDownloader = FileDownloader(url: imageUrl, filePath: storePath, taskIdentifier: identifier)
+            fileDownloader.downloadFile()
+            fileDownloader.operationStateHandler = { ( status,  fileStorePath,  _identifier) in
+                completion(status, fileStorePath, _identifier)
+            }
         }
     }
     

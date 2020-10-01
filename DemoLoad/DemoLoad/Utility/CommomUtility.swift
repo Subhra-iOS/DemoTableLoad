@@ -8,6 +8,23 @@
 import Foundation
 
 struct CommomUtility {
+    //MARK:---------create image file path--------------//
+    func fetchItemsImagePath(fileName:String?) -> String{
+        
+        let paths: String = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+        var path: String = paths.appendingFormat("/Downloads/Images/")
+        
+        _ =   CommomUtility().createDirectoryIfNecessaryForPath(path: path)
+        
+        if let _fileName : String = fileName, _fileName.count > 0 {
+            path = path.appendingFormat("%@", _fileName)
+        }else{
+            path = ""
+        }
+        
+        return  path
+    }
+    
     //MARK:----------Unique task id----------//
     func uniqueTaskIdentifier() -> String {
         

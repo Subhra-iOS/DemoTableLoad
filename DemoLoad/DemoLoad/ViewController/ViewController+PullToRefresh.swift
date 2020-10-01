@@ -23,11 +23,11 @@ extension ViewController{
                 guard let weakSelf = self else { return }
                 weakSelf.viewActivityLoader.stopAnimating()
                 weakSelf.lazyTable.isHidden = false
-                weakSelf.title = self?.viewModel?.title
+                weakSelf.title = weakSelf.viewModel?.title
                 weakSelf.lazyTable.reloadData()
                 if weakSelf.refreshControl.isRefreshing {
-                    self?.refreshControl.endRefreshing()
-                    self?.lazyTable.contentOffset = CGPoint.zero
+                    weakSelf.refreshControl.endRefreshing()
+                    weakSelf.lazyTable.contentOffset = CGPoint.zero
                 }
             }
         })

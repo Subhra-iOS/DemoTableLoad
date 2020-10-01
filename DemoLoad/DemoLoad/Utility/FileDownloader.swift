@@ -12,7 +12,7 @@ typealias FileDownloaderHandler = (_ status : Bool, _ fileStorePath : String?, _
 class FileDownloader : NSObject{
     
     private var downloadQueue: DispatchQueue = DispatchQueue(label: "com.download.Queue", attributes: .concurrent)
-    var sharedSessionTask : URLSessionTask?
+    private var sharedSessionTask : URLSessionTask?
     private var _url: String?
     private var storePath: String?
     public   var operationStateHandler : FileDownloaderHandler?
@@ -20,7 +20,7 @@ class FileDownloader : NSObject{
     
     /// Shared URL Session
     /// - Author: Subhra Roy
-    lazy  var sharedSession : URLSession? = {
+    private lazy  var sharedSession : URLSession? = {
         let session : URLSession = URLSession(configuration: URLSessionConfiguration.default, delegate: self, delegateQueue: nil)
         return session
     }()

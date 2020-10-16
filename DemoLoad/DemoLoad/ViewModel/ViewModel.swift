@@ -8,7 +8,7 @@
 import Foundation
 
 class ViewModel {
-    public private(set) var list: [TableCellViewModel]?
+    public var list: [TableCellViewModel]?
     public private(set) var title: String?
     public private(set) var dataModel: DataModel?
 
